@@ -1,4 +1,14 @@
 SolutionBook::Application.routes.draw do
+  get "post/post_question"
+  
+  post "post/post_question"
+
+  get "post/post_answer"
+
+  get "post/rate_question"
+
+  get "post/rate_answer"
+
   get "login/add_user"
   
   get "login/index" 

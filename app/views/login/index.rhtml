@@ -1,12 +1,15 @@
 <% @page_title = "Manage Your Questions and Answers" -%>
 <%= 	params[:message] %>
 </br>
+<%= error_messages_for 'user' %>
+</br>
+<%= error_messages_for 'question' %>
 <%= link_to("Log Out", :controller => "login",
 :action => "logout", :message => "#{params[:message]}") %>
 <table cellpadding="5" cellspacing="0">
 <% if @questions -%>
-<% for question in @questions %>
 <h3>Questions and Answers for you</h3>
+<% for question in @questions %>
 <tr valign="top">
 <td>
 <%= question.text %>
@@ -18,7 +21,9 @@
 <tr><td colspan="2"><hr/></td></tr>
 <% end %>
 <% end %>
-<% if @question.nil? -%>
+<% if @questions.nil? -%>
 <h3>No Questions posted by you</h3>
 <% end %>
 </table>
+<%= link_to "Post question to your friends", :controller => "post",
+:action => "post_question", :id => @user %>

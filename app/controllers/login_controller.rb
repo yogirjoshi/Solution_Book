@@ -47,6 +47,8 @@ class LoginController < ApplicationController
   end
   
   def index
+		@user = User.find_by_id(session[:user_id])
+		@questions=@user.questions
   end  
   
   def error
