@@ -1,0 +1,16 @@
+<% @page_title = "Add a Topic" -%>
+<% if flash[:notice] -%>
+<%= flash[:notice] -%>
+<% end %> 
+<%= error_messages_for('topic') %>
+<%= form_tag %>
+<table>
+<tr>
+<td>Topic name:</td>
+<td><%= text_field("topic", "name") %></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value=" ADD TOPIC " /></td>
+</tr>
+</table>

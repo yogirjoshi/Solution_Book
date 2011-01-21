@@ -1,9 +1,15 @@
-<h1>Post#post_question</h1>
+<h1>Post question to your friends and get best answers</h1>
 <%= form_tag do %>
 <table>
 <tr>
 <td>Question Text:</td>
 <td><%= text_field("question", "text") %></td>
+</tr>
+<tr>
+<td>Question Text:</td>
+<td>
+<%= select(:topic, :name, @topicnames) %>
+</td>
 </tr>
 <td></td>
 <td><input type="submit" value=" Post Question" /></td>

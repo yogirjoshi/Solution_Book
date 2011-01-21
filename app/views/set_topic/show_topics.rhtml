@@ -1,0 +1,24 @@
+<% @page_title = "ListTopics" -%>
+<%= error_messages_for 'topic' %>
+<h1>Listing all the topics for this group</h1>
+<table border="1">
+<tr>
+<th>NO&nbsp</th>
+<th>Name</th>
+</tr>
+<% count=0 %>
+<% for topic in @topics -%>
+<% count+=1 %>
+<tr>
+<td>
+<%= count -%>
+</td>
+<td>
+<%= link_to "#{topic.name}", :action => "view_topic", :id => topic.id %>
+</tr>
+<tr>
+<td></td>
+</tr>
+</table>
+<% end -%>
+<h3>Total topics displayed=&nbsp<%= @topic_count %></h3>

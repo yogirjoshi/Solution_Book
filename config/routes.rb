@@ -1,4 +1,14 @@
 SolutionBook::Application.routes.draw do
+  get "set_topic/add_topic"
+
+  get "set_topic/delete_topic"
+
+  get "set_topic/show_topics"
+
+  get "set_topic/view_topic"
+
+  post "set_topic/view_topic"
+
   get "post/post_question"
   
   post "post/post_question"
@@ -28,6 +38,12 @@ SolutionBook::Application.routes.draw do
   post "login/login" 
   
   post "login/index" 
+  
+  post "set_topic/add_topic"
+
+  post "set_topic/delete_topic"
+
+  post "set_topic/show_topics"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

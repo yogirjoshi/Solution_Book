@@ -10,12 +10,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121101833) do
+ActiveRecord::Schema.define(:version => 20110121161145) do
 
   create_table "questions", :force => true do |t|
     t.string   "text"
-    t.integer  "rating"
-    t.integer  "user_id"
+    t.integer  "rating",     :default => 0
+    t.integer  "user_id",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "topic_id"
+  end
+
+  add_index "questions", ["user_id"], :name => "user_id"
+
+  create_table "topics", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -23,6 +32,14 @@ ActiveRecord::Schema.define(:version => 20110121101833) do
   create_table "users", :force => true do |t|
     t.string   "name"
     t.string   "hashed_password"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "users_areas", :id => false, :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "area_id"
+    t.integer  "rating"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
