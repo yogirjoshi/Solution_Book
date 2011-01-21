@@ -1,0 +1,21 @@
+<% @page_title = "Login" -%>
+<% if flash[:notice] -%>
+<%= flash[:notice] -%>
+<% end %> 
+<%= error_messages_for 'user' %>
+<%= form_tag do %>
+<table>
+<tr>
+<td>User name:</td>
+<td><%= text_field("user", "name") %></td>
+</tr>
+<tr>
+<td>Password:</td>
+<td><%= password_field("user", "password") %></td>
+</tr>
+<tr>
+<td></td>
+<td><input type="submit" value=" Login" /></td>
+</tr>
+</table>
+<% end %>

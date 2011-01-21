@@ -1,0 +1,24 @@
+<% @page_title = "Manage Your Questions and Answers" -%>
+<%= 	params[:message] %>
+</br>
+<%= link_to("Log Out", :controller => "login",
+:action => "logout", :message => "#{params[:message]}") %>
+<table cellpadding="5" cellspacing="0">
+<% if @questions -%>
+<% for question in @questions %>
+<h3>Questions and Answers for you</h3>
+<tr valign="top">
+<td>
+<%= question.text %>
+</td>
+<td width="10">
+<h3><%=h question.rating %></h3>
+</td>
+</tr>
+<tr><td colspan="2"><hr/></td></tr>
+<% end %>
+<% end %>
+<% if @question.nil? -%>
+<h3>No Questions posted by you</h3>
+<% end %>
+</table>
