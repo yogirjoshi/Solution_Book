@@ -6,7 +6,7 @@
 <td><%= text_field("question", "text") %></td>
 </tr>
 <tr>
-<td>Select topic:</td>
+<td>Question Text:</td>
 <td>
 <%= select(:topic, :name, @topicnames) %>
 </td>

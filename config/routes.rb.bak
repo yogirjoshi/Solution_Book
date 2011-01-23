@@ -16,8 +16,6 @@ SolutionBook::Application.routes.draw do
   post "post/post_question"
 
   get "post/post_answer"
-  
-  post "post/post_answer"
 
   get "post/rate_question"
 

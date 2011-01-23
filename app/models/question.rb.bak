@@ -5,5 +5,4 @@ class Question < ActiveRecord::Base
 	has_many :likedby, 
 		   :through => :goodqueries, 
 		   :class_name => "User"
-	has_many :answers	   
 end

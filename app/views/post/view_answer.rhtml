@@ -1,0 +1,41 @@
+<% @page_title = "View Answers" -%>
+<% if flash[:notice] %>
+<%= 	flash[:notice] %>
+<% end %>
+</br>
+<%= error_messages_for 'question' %>
+</br>
+<%= error_messages_for 'answer' %>
+<h3>This question was asked by
+<%= @user.name -%>
+&nbspwho is rated at level
+<%= @user.rating(@question) -%>&nbsp
+in the group&nbsp</h4></br>
+The question is:</br>
+<h4><%= @question.text -%>&nbsp</h4></br>
+<% if !@answers.empty? %>
+<table cellpadding="5" cellspacing="0" border="1" >
+<tr>
+<th width="20">
+Answer	
+</th>
+<th width="50">
+Do you think this answer is good
+</th>
+</tr>
+<% for answer in @answers %>
+<tr>
+<td>
+<%= answer.Text -%>
+</td>
+<td>
+<%= link_to("Like", :controller => "post",:action => "rate_answer", :id => answer.id) -%> 
+</td>
+</tr>
+<% end -%></br>
+<% else -%>
+Question is yet to be answered in the group
+<% end -%></br>
+<%= link_to("Have a better Answer?", :controller => "post",:action => "post_answer", :id => @question.id) -%> 
+</br>
+<%= link_to("Go Back", :controller => "login",:action => "index") -%>

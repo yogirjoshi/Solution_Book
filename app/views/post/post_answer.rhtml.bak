@@ -1,0 +1,54 @@
+<h1>Post answer to this question</h1>
+<h3>The questions is: </br>
+<%= @question.text -%></br>
+The rating of this question is
+<%= @question.rating -%></h3>
+<% if !@question.answers.empty? -%>
+<table border="1">
+<tr>
+<th>
+Answer
+</th>
+<th>
+Rating
+</th>
+<th> 
+Do you like this answer?
+</th>
+</tr>
+<h4>The current anwers are as below</h4>
+<% for ans in @question.answers -%>
+<tr>
+<td>
+<%= ans.Text -%>
+</td>
+<td>
+<%= ans.rating -%>
+</td>
+<td>
+<% if ans.user_id != session[:user_id] -%>
+<%= link_to("Like", :controller => "post",:action => "rate_answer", :id => ans.id) -%> 
+<% else -%>
+Your Question
+<% end %>
+</td>
+</tr>
+<% end %>
+<% end %>
+</table>
+
+<%= form_tag do -%>
+<table>
+<tr>
+<td>Answer Text:</td>
+<td>
+<%= text_field("answer", "Text") %>
+<%= hidden_field("answer","question_id", :value => "#{@question.id}") %>
+</td>
+</tr>
+<td></td>
+<td><input type="submit" value=" Post Answer" /></td>
+</tr>
+</table>
+<% end %>
+

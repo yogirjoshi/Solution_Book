@@ -3,6 +3,7 @@ require "digest/sha1"
 class User < ActiveRecord::Base
 	has_and_belongs_to_many :topics
 	has_many :questions
+	has_many :answers
 	has_many :goodqueries
 	has_many :likedquestions, 
 		   :through => :goodqueries, 
@@ -28,6 +29,10 @@ class User < ActiveRecord::Base
 	end
 	def try_to_login
 		User.login(self.name, self.password)
+	end
+	def rating(question)
+		topicuser=TopicsUsers.find(:all,:conditions=>"topic_id = #{question.topic_id} and user_id=#{self.id}")
+		topicuser.first.rating
 	end
 	private
 	def self.hash_password(password)

@@ -40,7 +40,7 @@ class PostController < ApplicationController
   	#if request.get? 
   		@question=Question.find(params[:id])
   		@user=User.find_by_id(@question.user_id) 
-  		@answers=Answer.find(:all,:conditions => "question_id =#{@question.id}", :order=>"rating desc, updated_at desc") 
+  		@answers=Answer.find(:all,:question_id=>@question.id, :order=>"rating desc, updated_at desc") 
   	#else 
   	#	@question=Question.find(params[:id])
   	#	@user=User.find_by_id(@question.user_id) 

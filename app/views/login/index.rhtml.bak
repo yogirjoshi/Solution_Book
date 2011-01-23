@@ -48,7 +48,7 @@ Question
 <tr><td colspan="2"><hr/></td></tr>
 <% end %>
 <% end %>
-<% if @questions.empty? -%>
+<% if @questions.nil? -%>
 <h3>No Questions posted by you</h3>
 <% end %>
 </table>
