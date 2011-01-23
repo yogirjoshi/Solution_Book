@@ -1,5 +1,8 @@
 <% @page_title = "Manage Your Questions and Answers" -%>
 <%= 	params[:message] %>
+<% if flash[:notice] %>
+<%= 	flash[:notice] %>
+<% end %>
 </br>
 <%= error_messages_for 'user' %>
 </br>
@@ -16,6 +19,9 @@ Question
 <th width="10">
 <h4>Rating </h4>
 </th>
+<th width="80">
+<h4>Do you think this is a good question? </h4>
+</th>
 </tr>
 <% for question in @questions %>
 <tr>
@@ -24,6 +30,13 @@ Question
 </td>
 <td width="10">
 <h4><%= question.rating %></h4>
+</td>
+<td width="10">
+<% if question.user_id != session[:user_id] -%>
+<%= link_to("Like", :controller => "post",:action => "rate_question", :id => question.id) -%> 
+<% else -%>
+<h4>Your Question</h4>
+<% end -%>
 </td>
 </tr>
 <tr><td colspan="2"><hr/></td></tr>

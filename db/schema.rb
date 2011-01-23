@@ -10,7 +10,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110121161145) do
+ActiveRecord::Schema.define(:version => 20110122074409) do
+
+  create_table "goodqueries", :id => false, :force => true do |t|
+    t.integer  "question_id",                :null => false
+    t.integer  "user_id",                    :null => false
+    t.integer  "rating",      :default => 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "questions", :force => true do |t|
     t.string   "text"
@@ -29,17 +37,17 @@ ActiveRecord::Schema.define(:version => 20110121161145) do
     t.datetime "updated_at"
   end
 
-  create_table "users", :force => true do |t|
-    t.string   "name"
-    t.string   "hashed_password"
+  create_table "topics_users", :id => false, :force => true do |t|
+    t.integer  "topic_id",   :null => false
+    t.integer  "user_id",    :null => false
+    t.integer  "rating"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "users_areas", :id => false, :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "area_id"
-    t.integer  "rating"
+  create_table "users", :force => true do |t|
+    t.string   "name"
+    t.string   "hashed_password"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

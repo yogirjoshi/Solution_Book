@@ -1,7 +1,13 @@
 require "digest/sha1"
 
 class User < ActiveRecord::Base
+	has_and_belongs_to_many :topics
 	has_many :questions
+	has_many :goodqueries
+	has_many :likedquestions, 
+		   :through => :goodqueries, 
+		   :class_name => "Question"
+
 	attr_accessor :password
 	attr_accessible :name, :password
 	validates_uniqueness_of :name

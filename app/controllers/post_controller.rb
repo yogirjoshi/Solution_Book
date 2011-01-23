@@ -10,6 +10,10 @@ class PostController < ApplicationController
 		@question.user_id = session[:user_id]
 		@selected_topic = Topic.find_by_name(params["topic"]["name"])	
 		@question.topic_id = @selected_topic.id
+		if TopicsUsers.find(:all, :conditions => "user_id = #{session[:user_id]} and topic_id = #{@selected_topic.id}").empty?
+			@topicsusers = TopicsUsers.new(:topic_id =>  @selected_topic.id, :user_id => session[:user_id], :rating => 0)
+			@topicsusers.save
+		end
 		@question.save
 		flash[:notice] = "Question number #{@question.id} posted"
 		@question = nil
@@ -21,6 +25,32 @@ class PostController < ApplicationController
   end
 
   def rate_question
+	@question=Question.find(params[:id])
+	@topic=Topic.find(@question.topic_id)
+	@topicsuser=TopicsUsers.find(:all, :conditions => "user_id = #{session[:user_id]} and topic_id = #{@topic.id}")
+	if @topicsuser.empty?
+		rating=1	
+	else
+		rating= @topicsuser.first.rating
+		if rating = 0
+			rating=1
+		end
+	end
+	if Goodquery.find(:all, :conditions => "question_id = #{params[:id]} and user_id = #{session[:user_id]}").empty?
+		@goodquery = Goodquery.new( :question_id => params[:id], :user_id => session[:user_id], :rating => rating)
+		@goodquery.save
+		@question.rating+=rating
+		@question.save
+		@topic_of_liked_questions_user=TopicsUsers.find(:all, :conditions => "user_id = #{@question.user_id} and topic_id = #{@topic.id}")
+		@topic_of_liked_questions_user.first.rating+=rating
+		@topic_of_liked_questions_user.first.save
+	else
+		flash[:notice] = "You already like this question"
+	#	@goodquery = Goodquery.find(:all, :conditions => "question_id = params[:id] and user_id = session[:user_id]")
+	#	@goodquery.rating+=rating
+	end	
+
+	redirect_to( :controller => "login", :action => 'index' )
   end
 
   def rate_answer

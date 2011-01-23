@@ -48,7 +48,7 @@ class LoginController < ApplicationController
   
   def index
 		@user = User.find_by_id(session[:user_id])
-		@questions=@user.questions
+		@questions=Question.find(:all,:order => "rating desc,updated_at desc")
   end  
   
   def error
